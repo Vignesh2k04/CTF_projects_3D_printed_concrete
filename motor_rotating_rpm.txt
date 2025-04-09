@@ -1,0 +1,37 @@
+#define PUL 6  // Pulse pin
+#define DIR 7  // Direction pin
+#define ENA 5  // Enable pin (optional)
+
+void setup() {
+  pinMode(PUL, OUTPUT);
+  pinMode(DIR, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  
+  digitalWrite(ENA, LOW);  // Enable motor driver (LOW = enabled for most drivers)
+}
+
+void loop() {
+  digitalWrite(DIR, HIGH);  // Set direction (HIGH for forward, LOW for reverse)
+
+  // Rotate forward 2000 steps
+  for (int i = 0; i < 2000; i++) { 
+    digitalWrite(PUL, HIGH);
+    delayMicroseconds(500); // Adjust speed (Lower delay = faster movement)
+    digitalWrite(PUL, LOW);
+    delayMicroseconds(500);
+  }
+
+  delay(1000); // Pause for 1 second
+
+  digitalWrite(DIR, LOW);  // Reverse direction
+
+  // Rotate backward 2000 steps
+  for (int i = 0; i < 2000; i++) { 
+    digitalWrite(PUL, HIGH);
+    delayMicroseconds(500);
+    digitalWrite(PUL, LOW);
+    delayMicroseconds(500);
+  }
+
+  delay(1000); // Pause before repeating
+}
